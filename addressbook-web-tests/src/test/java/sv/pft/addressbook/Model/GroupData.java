@@ -1,4 +1,4 @@
-package sv.pft.addressbook;
+package sv.pft.addressbook.Model;
 
 public class GroupData {
     private final String name;
