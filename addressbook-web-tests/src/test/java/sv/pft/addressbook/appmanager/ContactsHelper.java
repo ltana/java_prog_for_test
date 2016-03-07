@@ -32,6 +32,10 @@ public class ContactsHelper extends HelperBase{
         }
     }
 
+    public void initAddContact() {
+        click(By.linkText("Додати контакт"));
+    }
+
     public void initModificationContact() {
         click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img"));
     }
@@ -49,6 +53,7 @@ public class ContactsHelper extends HelperBase{
     }
 
     public void createContact(ContactData contact) {
+        initAddContact();
         fillContactData(contact, true);
         saveContact();
     }

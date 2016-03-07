@@ -19,15 +19,6 @@ public class NavigationHelper extends HelperBase{
             click(By.linkText("Групи"));
     }
 
-    public void gotoAddContact() {
-        if (isElementPresent(By.name("submit")) &&
-                isElementPresent(By.name("firstname")))
-        {
-            return;
-        }
-            click(By.linkText("Додати контакт"));
-    }
-
     public void gotoHomePage() {
         if (isElementPresent(By.id("maintable"))) {
             return;
