@@ -10,6 +10,10 @@ import sv.pft.addressbook.Model.GroupData;
  */
 public class GroupsHelper extends HelperBase {
 
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
     public GroupsHelper(WebDriver wd) {
         super(wd);
     }
@@ -46,5 +50,12 @@ public class GroupsHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnToGroupPage();
     }
 }
