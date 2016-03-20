@@ -1,6 +1,7 @@
 package sv.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import sv.pft.addressbook.Model.ContactData;
 import sv.pft.addressbook.Model.GroupData;
@@ -9,8 +10,9 @@ import java.util.List;
 
 
 public class ContactDeletionTests extends TestBase {
-    @Test
-    public void testContactDeletion() throws InterruptedException {
+
+    @BeforeMethod
+    public void ensurePreconditions() {
         if (!app.getContactsHelper().isThereAContact()) {
             app.getNavigationHelper().gotoGroupPage();
             if (!app.getGroupsHelper().isThereAGroup()) {
@@ -20,6 +22,11 @@ public class ContactDeletionTests extends TestBase {
                     .createContact(new ContactData("Name", "SurnameDel", "Town, Street 2", "+111111111111", "name.surname@test.com", "[не вибрано]"));
             app.getNavigationHelper().gotoHomePage();
         }
+    }
+
+
+    @Test
+    public void testContactDeletion() throws InterruptedException {
         List<ContactData> before = app.getContactsHelper().getContactList();
         app.getContactsHelper().selectContact(before.size() - 1);
         app.getContactsHelper().deleteSelectedContact();
