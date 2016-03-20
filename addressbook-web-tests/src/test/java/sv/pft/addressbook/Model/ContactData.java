@@ -21,17 +21,6 @@ public class ContactData {
         this.group = group;
     }
 
-    public ContactData(String name, String lastname, String address, String mobile, String email, String group) {
-        this.name = name;
-        this.lastname = lastname;
-        this.address = address;
-        this.mobile = mobile;
-
-        this.email = email;
-        this.group = group;
-        this.id = 0;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,7 +28,6 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
-        if (id != that.id) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
@@ -49,8 +37,18 @@ public class ContactData {
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-        result = 31 * result + id;
         return result;
+    }
+
+    public ContactData(String name, String lastname, String address, String mobile, String email, String group) {
+        this.name = name;
+        this.lastname = lastname;
+        this.address = address;
+        this.mobile = mobile;
+
+        this.email = email;
+        this.group = group;
+        this.id = Integer.MAX_VALUE;
     }
 
     @Override
