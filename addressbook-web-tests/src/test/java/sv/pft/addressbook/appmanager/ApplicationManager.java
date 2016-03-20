@@ -21,15 +21,15 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
-    public GroupsHelper getGroupsHelper() {
+    public GroupsHelper group() {
         return groupsHelper;
     }
 
-    public ContactsHelper getContactsHelper() {
+    public ContactsHelper contact() {
         return contactsHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
