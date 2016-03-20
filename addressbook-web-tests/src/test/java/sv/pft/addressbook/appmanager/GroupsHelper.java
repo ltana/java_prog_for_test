@@ -13,10 +13,6 @@ import java.util.List;
  */
 public class GroupsHelper extends HelperBase {
 
-    public boolean isThereAGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public GroupsHelper(WebDriver wd) {
         super(wd);
     }
@@ -45,7 +41,6 @@ public class GroupsHelper extends HelperBase {
 
     public void selectGroup(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
-        //click(By.name("selected[]"));
     }
 
     public void initGroupModification() {
@@ -61,6 +56,10 @@ public class GroupsHelper extends HelperBase {
         fillGroupForm(group);
         submitGroupCreation();
         returnToGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
     }
 
     public int getGroupCount() {

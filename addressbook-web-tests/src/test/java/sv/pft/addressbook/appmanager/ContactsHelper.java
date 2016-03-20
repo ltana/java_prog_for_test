@@ -1,11 +1,8 @@
 package sv.pft.addressbook.appmanager;
 
-import com.thoughtworks.selenium.webdriven.commands.IsElementPresent;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import sv.pft.addressbook.Model.ContactData;
@@ -13,7 +10,7 @@ import sv.pft.addressbook.Model.ContactData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactsHelper extends HelperBase{
+public class ContactsHelper extends HelperBase {
 
     public ContactsHelper(WebDriver wd) {
         super(wd);
@@ -54,7 +51,6 @@ public class ContactsHelper extends HelperBase{
 
     public void deleteSelectedContact() {
         click(By.xpath("//*[@id='content']/form[2]/div[2]/input[@type='button']"));
-                //"//*[@id='content']/form[2]/div[2]/input"));
     }
 
     public void createContact(ContactData contact) {

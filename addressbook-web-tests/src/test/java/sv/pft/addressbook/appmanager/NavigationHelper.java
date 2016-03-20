@@ -2,9 +2,8 @@ package sv.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class NavigationHelper extends HelperBase{
+public class NavigationHelper extends HelperBase {
 
     public NavigationHelper(WebDriver wd) {
         super(wd);
@@ -16,7 +15,7 @@ public class NavigationHelper extends HelperBase{
                 isElementPresent(By.name("new"))) {
             return;
         }
-            click(By.linkText("Групи"));
+        click(By.linkText("Групи"));
     }
 
     public void gotoHomePage() {
@@ -24,6 +23,5 @@ public class NavigationHelper extends HelperBase{
             return;
         }
         click(By.linkText("Головна"));
-        //click(By.linkText("home page"));
     }
 }

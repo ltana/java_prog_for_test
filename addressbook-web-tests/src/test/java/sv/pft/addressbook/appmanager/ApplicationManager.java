@@ -21,6 +21,18 @@ public class ApplicationManager {
         this.browser = browser;
     }
 
+    public GroupsHelper getGroupsHelper() {
+        return groupsHelper;
+    }
+
+    public ContactsHelper getContactsHelper() {
+        return contactsHelper;
+    }
+
+    public NavigationHelper getNavigationHelper() {
+        return navigationHelper;
+    }
+
     public void init() {
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
@@ -41,17 +53,5 @@ public class ApplicationManager {
 
     public void stop() {
         wd.quit();
-    }
-
-    public GroupsHelper getGroupsHelper() {
-        return groupsHelper;
-    }
-
-    public ContactsHelper getContactsHelper() {
-        return contactsHelper;
-    }
-
-    public NavigationHelper getNavigationHelper() {
-        return navigationHelper;
     }
 }

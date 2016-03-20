@@ -11,9 +11,9 @@ import java.util.List;
 public class ContactDeletionTests extends TestBase {
     @Test
     public void testContactDeletion() throws InterruptedException {
-        if (! app.getContactsHelper().isThereAContact()) {
+        if (!app.getContactsHelper().isThereAContact()) {
             app.getNavigationHelper().gotoGroupPage();
-            if (! app.getGroupsHelper().isThereAGroup()) {
+            if (!app.getGroupsHelper().isThereAGroup()) {
                 app.getGroupsHelper().createGroup(new GroupData("test1", "test2", "test3"));
             }
             app.getContactsHelper()
