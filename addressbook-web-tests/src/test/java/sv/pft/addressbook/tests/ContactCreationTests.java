@@ -3,6 +3,7 @@ package sv.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import sv.pft.addressbook.Model.ContactData;
+import sv.pft.addressbook.Model.GroupData;
 
 import java.util.List;
 

@@ -6,9 +6,6 @@ import sv.pft.addressbook.Model.ContactData;
 import sv.pft.addressbook.Model.GroupData;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 
 public class ContactDeletionTests extends TestBase {
@@ -31,5 +28,8 @@ public class ContactDeletionTests extends TestBase {
         app.getNavigationHelper().gotoHomePage();
         List<ContactData> after = app.getContactsHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() - 1);
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
     }
 }
