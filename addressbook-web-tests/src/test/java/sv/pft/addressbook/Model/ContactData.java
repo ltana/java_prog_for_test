@@ -1,24 +1,47 @@
 package sv.pft.addressbook.Model;
 
 public class ContactData {
-    private final String name;
-    private final String lastname;
-    private final String address;
-    private final String mobile;
-    private final String email;
-    private final String group;
-    private int id;
+    private String name;
+    private String lastname;
+    private String address;
+    private String mobile;
+    private String email;
+    private String group;
+    private int id = Integer.MAX_VALUE;;
 
-
-
-    public ContactData(int id, String name, String lastname, String address, String mobile, String email, String group) {
+    public ContactData withId(int id) {
         this.id = id;
+        return this;
+    }
+
+    public ContactData withName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
         this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withAddress(String address) {
         this.address = address;
+        return this;
+    }
+
+    public ContactData withMobile(String mobile) {
         this.mobile = mobile;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
         this.group = group;
+        return this;
     }
 
     @Override
@@ -40,17 +63,6 @@ public class ContactData {
         return result;
     }
 
-    public ContactData(String name, String lastname, String address, String mobile, String email, String group) {
-        this.name = name;
-        this.lastname = lastname;
-        this.address = address;
-        this.mobile = mobile;
-
-        this.email = email;
-        this.group = group;
-        this.id = Integer.MAX_VALUE;
-    }
-
     @Override
     public String toString() {
         return "ContactData{" +
@@ -67,10 +79,6 @@ public class ContactData {
 
     public String getLastname() {
         return lastname;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {

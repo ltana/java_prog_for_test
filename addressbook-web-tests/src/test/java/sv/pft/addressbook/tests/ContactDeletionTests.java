@@ -16,10 +16,12 @@ public class ContactDeletionTests extends TestBase {
         if (app.contact().list().size() == 0) {
             app.goTo().groupPage();
             if (app.group().list().size() == 0) {
-                app.group().create(new GroupData("test1", "test2", "test3"));
+                app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.contact()
-                    .create(new ContactData("Name", "SurnameDel", "Town, Street 2", "+111111111111", "name.surname@test.com", "[не вибрано]"));
+                    .create(new ContactData().withName("CrName")
+                            .withLastname("Surnamedel").withAddress("Town, Street 2")
+                            .withMobile("+111111111111").withEmail("name.surname@test.com").withGroup("[не вибрано]"));
             app.goTo().homePage();
         }
     }

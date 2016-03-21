@@ -19,10 +19,12 @@ public class ContactModificationTests extends TestBase {
         if (app.contact().list().size() == 0) {
             app.goTo().groupPage();
             if (app.group().list().size() == 0) {
-                app.group().create(new GroupData("test1", "test2", "test3"));
+                app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
             }
             app.contact()
-                    .create(new ContactData("Name", "SurnameDel", "Town, Street 2", "+111111111111", "name.surname@test.com", "[не вибрано]"));
+                    .create(new ContactData().withName("CrName")
+                            .withLastname("Surname").withAddress("Town, Street 2")
+                            .withMobile("+111111111111").withEmail("name.surname@test.com").withGroup("[не вибрано]"));
             app.goTo().homePage();
         }
     }
@@ -30,7 +32,9 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         List<ContactData> before = app.contact().list();
-        ContactData contact = new ContactData(before.get(0).getId(), "newName", "newSurname", "newTown, Street 2", "+111111111111", "name.surname@test.com", null);
+        ContactData contact = new ContactData().withId(before.get(0).getId()).withName("CrName")
+                .withLastname("Surname").withAddress("Town, Street 2")
+                .withMobile("+111111111111").withEmail("name.surname@test.com");
         app.contact().modify(contact);
         app.goTo().homePage();
         List<ContactData> after = app.contact().list();
