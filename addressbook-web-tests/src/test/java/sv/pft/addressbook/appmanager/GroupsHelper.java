@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import sv.pft.addressbook.Model.GroupData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Ltana on 28.02.2016.
@@ -39,14 +40,14 @@ public class GroupsHelper extends HelperBase {
         click(By.name("delete"));
     }
 
-    public void delete(int index) {
-        select(index);
+    public void delete(GroupData group) {
+        selectById(group.getId());
         deleteSelectedGroup();
         groupPage();
     }
 
-    public void select(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void selectById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void initGroupModification() {
@@ -64,8 +65,8 @@ public class GroupsHelper extends HelperBase {
         groupPage();
     }
 
-    public void modify(int index, GroupData group) {
-        select(index);
+    public void modify(GroupData group) {
+        selectById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
@@ -80,8 +81,8 @@ public class GroupsHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             String name = element.getText();
