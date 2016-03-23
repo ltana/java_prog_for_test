@@ -59,6 +59,7 @@ public class ContactsHelper extends HelperBase {
         initAddContact();
         fillContactData(contact, true);
         saveContact();
+        contactCache = null;
     }
 
     public void delete(ContactData contact) throws InterruptedException {
@@ -66,32 +67,39 @@ public class ContactsHelper extends HelperBase {
         deleteSelectedContact();
         acceptAlert();
         Thread.sleep(1000);
+        contactCache = null;
     }
 
     public void modify(ContactData contact) {
         initModificationContact(contact.getId());
         fillContactData(contact, false);
         submitContactModification();
+        contactCache = null;
     }
 
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.cssSelector("[name=entry]"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.cssSelector("input")).getAttribute("id"));
             String name = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(3)")).getText();
             String lastname = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(2)")).getText();
-            contacts.add(new ContactData().withId(id).withName(name).withLastname(lastname));
+            contactCache.add(new ContactData().withId(id).withName(name).withLastname(lastname));
             //System.out.println("contact1 = " + id + name + lastname);
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 }

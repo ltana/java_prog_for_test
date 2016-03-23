@@ -11,6 +11,7 @@ import java.util.Set;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Ltana on 28.02.2016.
@@ -41,8 +42,8 @@ public class ContactModificationTests extends TestBase {
                 .withMobile("+111111111111").withEmail("name.surname@test.com");
         app.contact().modify(contact);
         app.goTo().homePage();
+        assertEquals(app.contact().count(), before.size());
         Contacts after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size());
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }

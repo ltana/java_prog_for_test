@@ -17,8 +17,8 @@ public class ContactCreationTests extends TestBase {
                 .withMobile("+111111111111").withEmail("name.surname@test.com").withGroup("[не вибрано]");
         app.contact().create(contact);
         app.goTo().homePage();
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
 
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
