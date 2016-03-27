@@ -1,6 +1,5 @@
 package sv.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import sv.pft.addressbook.Model.GroupData;
@@ -33,7 +32,7 @@ public class GroupModificationTests extends TestBase {
         Groups after = app.group().all();
 
         assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
-     }
+    }
 
 
 }
