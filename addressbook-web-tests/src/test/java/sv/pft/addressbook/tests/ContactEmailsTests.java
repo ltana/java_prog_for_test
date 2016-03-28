@@ -22,7 +22,7 @@ public class ContactEmailsTests extends TestBase {
             app.contact()
                     .create(new ContactData().withName("CrName")
                             .withLastname("Surnamedel").withEmail1("test1@test.te")
-                            .withEmail2("test2@test.te").withEmail3("test2@test.te").withGroup("[не вибрано]"));
+                            .withEmail2("test2@test.te").withEmail3("test2@test.te").withGroup("[none]"));
             app.goTo().homePage();
         }
     }

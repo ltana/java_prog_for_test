@@ -38,7 +38,7 @@ public class ContactsHelper extends HelperBase {
     }
 
     public void initAddContact() {
-        click(By.linkText("Додати контакт"));
+        click(By.linkText("add new"));
     }
 
     public void initModificationContact(int id) {
@@ -52,6 +52,43 @@ public class ContactsHelper extends HelperBase {
     private void selectById(int id) {
         wd.findElement(By.cssSelector("input[id = '" + id + "']")).click();
     }
+
+
+
+
+    public int getContactId(String name) {
+        int id =  Integer.parseInt(wd.findElement(By.xpath(".//*[@id='maintable']/tbody/tr[td = '" + name + "']/td[1]/input")).getAttribute("id"));
+        return id;
+    }
+
+    public void initViewContact(int id) {
+        click(By.cssSelector("a[href='view.php?id=" + id + "']"));
+    }
+
+    public String infoFromDetailedForm() {
+        String element = wd.findElement(By.id("content")).getText();
+        return element;
+    }
+
+    public ContactData infoFromEditFormForContactName(String name) {
+        initModificationContact(getContactId(name));
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lasttname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+        String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
+        String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactData().withId(getContactId(name)).withName(firstname).withLastname(lasttname)
+                .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone)
+                .withAddress(address);
+    }
+
+
+
+
+
+
 
     public void deleteSelectedContact() {
         click(By.xpath("//*[@id='content']/form[2]/div[2]/input[@type='button']"));
@@ -126,6 +163,5 @@ public class ContactsHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withName(firstname).withLastname(lasttname)
                 .withHomePhone(homePhone).withMobilePhone(mobilePhone).withWorkPhone(workPhone).withAddress(address)
                 .withEmail1(email1).withEmail2(email2).withEmail3(email3);
-
     }
 }
