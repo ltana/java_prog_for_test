@@ -1,5 +1,7 @@
 package sv.pft.addressbook.Model;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 
 public class ContactData {
@@ -15,6 +17,7 @@ public class ContactData {
     private String email3;
     private String allEmails;
     private String group;
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
     private File photo;
 
