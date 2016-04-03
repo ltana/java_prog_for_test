@@ -6,7 +6,7 @@ public class GroupData {
     private  String name;
     private  String header;
     private  String footer;
-    //@XStreamOmitField
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;;
 
     public GroupData withId(int id) {
