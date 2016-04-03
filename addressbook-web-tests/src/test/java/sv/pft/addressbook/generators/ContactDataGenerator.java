@@ -59,9 +59,9 @@ public class ContactDataGenerator {
         xstream.processAnnotations(ContactData.class);
         //xstream.alias("contact", ContactData.class);
         String xml = xstream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
     private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
@@ -76,10 +76,10 @@ public class ContactDataGenerator {
 
     private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-        String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+            String json = gson.toJson(contacts);
+            try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private List<ContactData> generateContacts(int count) {
