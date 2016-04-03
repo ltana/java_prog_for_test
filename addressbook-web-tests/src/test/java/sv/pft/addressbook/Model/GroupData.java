@@ -1,10 +1,14 @@
 package sv.pft.addressbook.Model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 public class GroupData {
+    @Expose
     private  String name;
+    @Expose
     private  String header;
+    @Expose
     private  String footer;
     @XStreamOmitField
     private int id = Integer.MAX_VALUE;;

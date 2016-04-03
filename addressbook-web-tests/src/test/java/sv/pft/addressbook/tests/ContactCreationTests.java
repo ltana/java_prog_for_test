@@ -1,5 +1,7 @@
 package sv.pft.addressbook.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -52,20 +54,22 @@ public class ContactCreationTests extends TestBase {
         return contacts.stream().map((c) -> new Object[] {c}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validContactsCsv")
-    public void testContactCreationWithoutPhotoCSV(ContactData contact) {
-        Contacts before = app.contact().all();
-        app.contact().create(contact);
-        app.goTo().homePage();
-        assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
-
-        assertThat(after, equalTo(before.withAdded(
-                contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+    @DataProvider
+    public Iterator<Object[]> validContactsJson() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
+        String json = "";
+        String line = reader.readLine();
+        while (line !=null) {
+            json += line;
+            line = reader.readLine();
+        }
+        Gson gson = new Gson();
+        List<ContactData> groups = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType());
+        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validContactsXml")
-    public void testContactCreationWithoutPhotoXml(ContactData contact) {
+    @Test(dataProvider = "validContactsJson")
+    public void testContactCreationWithoutPhotoCSV(ContactData contact) {
         Contacts before = app.contact().all();
         app.contact().create(contact);
         app.goTo().homePage();
@@ -80,7 +84,7 @@ public class ContactCreationTests extends TestBase {
     public void testContactCreationWithPhoto() {
         Contacts before = app.contact().all();
         File photo = new File("src/test/resources/mytests.png");
-        ContactData contact = new ContactData().withName("CrName")
+        ContactData contact = new ContactData().withName("CrNamePhoto")
                 .withLastname("Surname").withAddress("Town, Street 2")
                 .withMobilePhone("+111111111111").withEmail1("name.surname@test.com").withPhoto(photo).withGroup("[none]");
         app.contact().create(contact);

@@ -3,6 +3,8 @@ package sv.pft.addressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import sv.pft.addressbook.Model.ContactData;
 
@@ -45,6 +47,8 @@ public class ContactDataGenerator {
             saveAsCsv(contacts, new File(file));
         } else if (format.equals("xml")){
             saveAsXml(contacts, new File(file));
+        } else if (format.equals("json")){
+            saveAsJson(contacts, new File(file));
         } else {
             System.out.println("Unrecognased format " + format);
         }
@@ -67,6 +71,14 @@ public class ContactDataGenerator {
             writer.write(String.format("%s;%s;%s;%s;%s\n", contact.getName(), contact.getLastname(),
                     contact.getAddress(), contact.getMobilePhone(), contact.getGroup()));
         }
+        writer.close();
+    }
+
+    private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
+        String json = gson.toJson(contacts);
+        Writer writer = new FileWriter(file);
+        writer.write(json);
         writer.close();
     }
 
