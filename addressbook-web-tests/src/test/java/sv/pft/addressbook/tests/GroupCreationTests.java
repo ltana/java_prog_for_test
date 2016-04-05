@@ -3,6 +3,8 @@ package sv.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import sv.pft.addressbook.Model.GroupData;
@@ -20,6 +22,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTests extends TestBase {
+
+
 
     @DataProvider
     public Iterator<Object[]> validGroupsXml() throws IOException {
