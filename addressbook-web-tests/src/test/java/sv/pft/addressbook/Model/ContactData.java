@@ -29,7 +29,7 @@ public class ContactData {
     @Column(name = "work")
     @Type(type = "text")
     private String workPhone;
-    @Transient
+    @Transient //hibernate miss(avoid) it
     private String allPhones;
     @Column(name = "email")
     @Type(type = "text")
@@ -47,12 +47,13 @@ public class ContactData {
     @Id
     @Column(name = "id")
     private int id = Integer.MAX_VALUE;;
-    @Transient
+
+    @Column(name = "photo")
     @Type(type = "text")
-    private File photo;
+    private String photo;
 
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
 
@@ -174,7 +175,7 @@ public class ContactData {
     }
 
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
@@ -183,6 +184,15 @@ public class ContactData {
                 "name='" + name + '\'' +
                 ", lastname='" + lastname + '\'' +
                 ", id='" + id + '\'' +
+                ", address='" + address + '\'' +
+                ", homePhone='" + homePhone + '\'' +
+                ", workPhone='" + workPhone + '\'' +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", email1='" + email1 + '\'' +
+                ", email2='" + email2 + '\'' +
+                ", email3='" + email3 + '\'' +
+                ", group='" + group + '\'' +
+                ", photo='" + photo + '\'' +
                 '}';
     }
 
