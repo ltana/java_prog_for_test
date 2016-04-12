@@ -2,29 +2,53 @@ package sv.pft.addressbook.Model;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
     @Expose
+    @Column(name = "firstname")
     private String name;
     @Expose
     private String lastname;
     @Expose
+    @Type(type = "text")
     private String address;
+    @Column(name = "home")
+    @Type(type = "text")
     private String homePhone;
     @Expose
+    @Column(name = "mobile")
+    @Type(type = "text")
     private String mobilePhone;
+    @Column(name = "work")
+    @Type(type = "text")
     private String workPhone;
+    @Transient
     private String allPhones;
+    @Column(name = "email")
+    @Type(type = "text")
     private String email1;
+    @Type(type = "text")
     private String email2;
+    @Type(type = "text")
     private String email3;
+    @Transient
     private String allEmails;
     @Expose
+    @Transient
     private String group;
     @XStreamOmitField
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;;
+    @Transient
+    @Type(type = "text")
     private File photo;
 
     public ContactData withPhoto(File photo) {

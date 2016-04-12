@@ -2,15 +2,30 @@ package sv.pft.addressbook.Model;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "group_list")
 public class GroupData {
     @Expose
+    @Column(name = "group_name")
     private  String name;
     @Expose
+    @Column(name = "group_header")
+    @Type(type = "text")
     private  String header;
     @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
     private  String footer;
     @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
     private int id = Integer.MAX_VALUE;;
 
     public GroupData withId(int id) {
@@ -72,6 +87,8 @@ public class GroupData {
     public String toString() {
         return "GroupData{" +
                 "name='" + name + '\'' +
+                ", header='" + header + '\'' +
+                ", footer='" + footer + '\'' +
                 ", id='" + id + '\'' +
                 '}';
     }
