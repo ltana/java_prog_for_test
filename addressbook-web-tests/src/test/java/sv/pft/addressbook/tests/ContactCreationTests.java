@@ -69,13 +69,14 @@ public class ContactCreationTests extends TestBase {
         return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
 
-    @Test(dataProvider = "validContactsJson")
-    public void testContactCreationWithoutPhotoCSV(ContactData contact) {
-        Contacts before = app.contact().all();
+    @Test(enabled = false, dataProvider = "validContactsJson")
+    public void testContactCreationWithoutPhotoJSON(ContactData contact) {
+        Contacts before = app.db().contacts();
+        app.goTo().homePage();
         app.contact().create(contact);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
@@ -83,15 +84,25 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreationWithPhoto() {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         File photo = new File("src/test/resources/mytests.png");
-        ContactData contact = new ContactData().withName("CrNamePhoto")
-                .withLastname("Surname").withAddress("Town, Street 2")
-                .withMobilePhone("+111111111111").withEmail1("name.surname@test.com").withPhoto(photo).withGroup("[none]");
+        ContactData contact = new ContactData()
+                .withName("CrNamePhoto")
+                .withLastname("Surname")
+                .withAddress("Town, Street 2")
+                .withMobilePhone("+111111111111")
+                .withHomePhone("+2")
+                .withWorkPhone("+3")
+                .withEmail1("name.surname@test.com")
+                .withEmail2("asdasd")
+                .withEmail3("asdasdfdgd")
+                .withPhoto(photo)
+                .withGroup("new test1");
+        app.goTo().homePage();
         app.contact().create(contact);
         app.goTo().homePage();
         assertThat(app.contact().count(), equalTo(before.size() + 1));
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
         assertThat(after, equalTo(before.withAdded(
                 contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));

@@ -26,7 +26,6 @@ public class GroupModificationTests extends TestBase {
     @Test
     public void testGroupModification() {
         Groups before = app.db().groups();
-        System.out.println(before);
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData().withId(modifiedGroup.getId()).withName("new test1").withFooter("new footer1")
                 .withHeader("new header1");
