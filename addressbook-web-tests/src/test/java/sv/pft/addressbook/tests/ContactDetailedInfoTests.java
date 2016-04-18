@@ -20,7 +20,8 @@ public class ContactDetailedInfoTests extends TestBase {
         ContactData createdContact = new ContactData().withName("DetailedName")
                 .withLastname("DetailedSurname").withAddress("DetailedH Town, Street 2, 4/3")
                 .withMobilePhone("+111111111111").withHomePhone("+8 (456)").withEmail1("")
-                .withGroup("[none]");
+                //.withGroup("[none]")
+                ;
         app.contact().create(createdContact);
         app.goTo().homePage();
 

@@ -23,7 +23,9 @@ public class ContactPhoneTests extends TestBase {
             app.contact()
                     .create(new ContactData().withName("CrName")
                             .withLastname("Surnamedel").withHomePhone("+123")
-                            .withMobilePhone("+111111111111").withWorkPhone("654").withGroup("[none]"));
+                            .withMobilePhone("+111111111111").withWorkPhone("654")
+                           // .withGroup("[none]")
+                    );
             app.goTo().homePage();
         }
     }

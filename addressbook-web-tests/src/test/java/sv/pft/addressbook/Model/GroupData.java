@@ -4,10 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "group_list")
@@ -19,6 +18,21 @@ public class GroupData {
     @Column(name = "group_header")
     @Type(type = "text")
     private  String header;
+    @Expose
+    @Column(name = "group_footer")
+    @Type(type = "text")
+    private  String footer;
+    @XStreamOmitField
+    @Id
+    @Column(name = "group_id")
+    private int id = Integer.MAX_VALUE;
+
+    public Contacts getContacts() {
+        return new Contacts(contacts);
+    }
+
+    @ManyToMany(mappedBy = "groups")
+    private Set<ContactData> contacts = new HashSet<ContactData>();
 
     @Override
     public boolean equals(Object o) {
@@ -31,7 +45,6 @@ public class GroupData {
         if (name != null ? !name.equals(groupData.name) : groupData.name != null) return false;
         if (header != null ? !header.equals(groupData.header) : groupData.header != null) return false;
         return footer != null ? footer.equals(groupData.footer) : groupData.footer == null;
-
     }
 
     @Override
@@ -42,15 +55,6 @@ public class GroupData {
         result = 31 * result + id;
         return result;
     }
-
-    @Expose
-    @Column(name = "group_footer")
-    @Type(type = "text")
-    private  String footer;
-    @XStreamOmitField
-    @Id
-    @Column(name = "group_id")
-    private int id = Integer.MAX_VALUE;;
 
     public GroupData withId(int id) {
         this.id = id;

@@ -18,7 +18,9 @@ public class ContactAddressTests extends TestBase {
             }
             app.contact()
                     .create(new ContactData().withName("CrName")
-                            .withLastname("Surnamedel").withAddress("New Town, Street av., 32").withGroup("[none]"));
+                            .withLastname("Surnamedel").withAddress("New Town, Street av., 32")
+                            //.withGroup("[none]")
+                    );
             app.goTo().homePage();
         }
     }

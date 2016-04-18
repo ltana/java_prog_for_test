@@ -7,6 +7,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import sv.pft.addressbook.Model.ContactData;
 import sv.pft.addressbook.Model.Contacts;
+import sv.pft.addressbook.Model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,7 +34,8 @@ public class ContactCreationTests extends TestBase {
                     .withLastname(split[1])
                     .withAddress(split[2])
                     .withMobilePhone(split[3])
-                    .withGroup(split[4])});
+                    //.withGroup(split[4])
+            });
             line = reader.readLine();
         }
         return list.iterator();
@@ -86,6 +88,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreationWithPhoto() {
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         File photo = new File("src/test/resources/mytests.png");
         ContactData contact = new ContactData()
@@ -99,7 +102,8 @@ public class ContactCreationTests extends TestBase {
                 .withEmail2("asdasd")
                 .withEmail3("asdasdfdgd")
                 .withPhoto(photo)
-                .withGroup("new test1");
+                .inGroup(groups.iterator().next())
+                ;
         app.goTo().homePage();
         app.contact().create(contact);
         app.goTo().homePage();
