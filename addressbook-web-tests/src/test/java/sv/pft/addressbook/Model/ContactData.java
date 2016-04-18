@@ -228,7 +228,6 @@ public class ContactData {
                 ", email2='" + email2 + '\'' +
                 ", email3='" + email3 + '\'' +
                 ", id=" + id +
-                ", photo='" + photo + '\'' +
                 '}';
     }
 }
