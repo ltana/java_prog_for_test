@@ -72,34 +72,5 @@ public class TestBase {
             System.out.println("dbContacts " + dbContacts);
         }
     }
-/*
-    private String mergeEmails(ContactData contact) {
-        return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
-                .stream().filter((s) -> !s.equals(""))
-                .collect(Collectors.joining("\n"));
-    };
-            //.getAllEmails())));
-        }
-
-        /*assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-    }
-
-    private String mergeEmails(ContactData contact) {
-        return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
-                .stream().filter((s) -> !s.equals(""))
-                .collect(Collectors.joining("\n"));
-    }*/
-
-
-        /*int id = Integer.parseInt(element.findElement(By.cssSelector("input")).getAttribute("id"));
-            String name = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(3)")).getText();
-            String lastname = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(2)")).getText();
-            String allPhones = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(6)"))
-                    .getText();
-            String address = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(4)")).getText();
-            String allEmails = element.findElement(By.cssSelector("[name=entry]>td:nth-of-type(5)"))
-                    .getText();
-            contactCache.add(new ContactData().withId(id).withName(name).withLastname(lastname)
-            .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));*/
-    }
+}
 
