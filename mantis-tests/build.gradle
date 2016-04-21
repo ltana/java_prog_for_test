@@ -9,18 +9,3 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.52.0'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
-
-task {
-    useTestNG {
-        suites 'src/test/resources/testngGroups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${verifyUI}"
-    }
-}

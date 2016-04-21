@@ -54,8 +54,18 @@ public class ContactAddToGroupTests extends TestBase {
         Groups groups = app.db().groups();
 
         for (ContactData contact : contacts) {
-           for (GroupData group : contact.getGroups()) {
-              groups.contains(group.getId());
+
+        Groups contactGroups = contact.getGroups();
+           // int groupID = contactGroups.getId();
+
+            for (GroupData group : groups) {
+                System.out.println("enter sec for");
+              if (contactGroups.contains(group)) {}
+                else {
+                  System.out.println("not contains");
+                  //CORRECT METHOD INGROUP()
+                  contact.inGroup(group);
+              }
 
                        //contact.getGroups().equals((g) -> groups);
             /*if (contact.getGroups().equals(groups)){
@@ -64,8 +74,11 @@ public class ContactAddToGroupTests extends TestBase {
 
             }*/
 
-                    System.out.println(contact.getGroups());
+
            }
+            System.out.println(contact.getGroups());
+            System.out.println(groups);
+            System.out.println(contactGroups);
         }
 
 
