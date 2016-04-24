@@ -8,11 +8,6 @@ import sv.pft.addressbook.Model.GroupData;
 import sv.pft.addressbook.Model.Groups;
 
 import java.io.File;
-import java.util.List;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.testng.Assert.assertEquals;
 
 /**
  * Created by Ltana on 28.02.2016.
@@ -62,9 +57,10 @@ public class ContactAddToGroupTests extends TestBase {
                 System.out.println("enter sec for");
               if (contactGroups.contains(group)) {}
                 else {
+                  contact.inGroup(group);
                   System.out.println("not contains");
                   //CORRECT METHOD INGROUP()
-                  contact.inGroup(group);
+
               }
 
                        //contact.getGroups().equals((g) -> groups);
@@ -80,6 +76,16 @@ public class ContactAddToGroupTests extends TestBase {
             System.out.println(groups);
             System.out.println(contactGroups);
         }
+
+
+        /*inGroup:
+  public ContactData inGroup(GroupData group) {
+    if (groups == null) {
+      groups = new HashSet<GroupData>();
+    }
+    groups.add(group);
+    return this;
+  }*/
 
 
         /* assertThat(uiContacts, equalTo(dbContacts.stream()

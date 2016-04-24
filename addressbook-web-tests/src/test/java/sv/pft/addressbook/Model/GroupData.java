@@ -28,10 +28,13 @@ public class GroupData {
     private int id = Integer.MAX_VALUE;
 
     public Contacts getContacts() {
+        if (contacts == null) {
+            contacts = new HashSet<ContactData>();
+        }
         return new Contacts(contacts);
     }
 
-    @ManyToMany(mappedBy = "groups")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
     private Set<ContactData> contacts = new HashSet<ContactData>();
 
     @Override

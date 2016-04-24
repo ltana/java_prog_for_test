@@ -24,4 +24,16 @@ public class RegistrationHelper extends HelperBase {
         type(By.name("password_confirm"), password);
         click(By.cssSelector("input[value='Update User']"));
     }
+
+    public void initChangePassword(int id) {
+        click(By.linkText("Manage Users"));
+        click(By.cssSelector("a[href='manage_user_edit_page.php?user_id=" + id + "']"));
+        click(By.cssSelector("input[value='Reset Password']"));
+    }
+
+    public void login(String userName, String password) {
+        type(By.name("username"), userName);
+        type(By.name("password"), password);
+        click(By.cssSelector("input[value='Login']"));
+    }
 }

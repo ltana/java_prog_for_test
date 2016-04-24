@@ -2,7 +2,6 @@ package sv.pft.addressbook.Model;
 
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -166,6 +165,9 @@ public class ContactData {
     }
 
     public Groups getGroups() {
+        if (groups == null) {
+            groups = new HashSet<GroupData>();
+        }
         return new Groups(groups);
     }
 
@@ -236,6 +238,9 @@ public class ContactData {
     }
 
     public ContactData inGroup(GroupData group) {
+        if (groups == null) {
+            groups = new HashSet<GroupData>();
+        }
         groups.add(group);
         return this;
     }
